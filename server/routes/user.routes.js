@@ -26,7 +26,8 @@ router.post('/', async (req, res) => {
       lectures,
       careers,
       education,
-      sections
+      sections,
+      books
     } = req.body;
 
     // undefined 값을 null로 대체
