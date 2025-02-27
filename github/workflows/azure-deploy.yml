@@ -1,0 +1,56 @@
+name: Azure Deployment
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치에 푸시될 때 실행
+
+jobs:
+  # 프론트엔드 배포
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install & Build Frontend
+        run: |
+          cd client
+          npm ci
+          npm run build
+          
+      - name: Deploy to Azure Static Web App
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APP_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          app_location: 'client'
+          output_location: 'build'  # React 기준(Vue는 'dist', Angular는 'dist/[project-name]')
+          skip_api_build: true
+          
+  # 백엔드 배포
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install Backend Dependencies
+        run: |
+          cd server
+          npm ci
+          
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'backend-brandfactory'  # Azure App Service의 이름으로 변경
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: './server'

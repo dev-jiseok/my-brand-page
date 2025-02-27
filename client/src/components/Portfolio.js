@@ -281,6 +281,38 @@ const Portfolio = ({ userData }) => {
         </div>
       </section>
 
+      {/* Certificates & Awards Section */}
+      <section className="py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-bold mb-8">Certificates & Awards</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {userData.certificates_awards?.map((item, index) => (
+              <div key={index} className="bg-gray-800 rounded-lg p-6">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-blue-400 text-sm uppercase">
+                        {item.type}
+                      </span>
+                      <span className="text-gray-500 text-sm">
+                        {new Date(item.date_received).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                    <p className="text-gray-400 text-sm mb-2">
+                      발급기관: {item.issuer}
+                    </p>
+                    {item.description && (
+                      <p className="text-gray-400 text-sm">{item.description}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section className="py-16 px-6 bg-gray-800">
         <div className="max-w-6xl mx-auto">
