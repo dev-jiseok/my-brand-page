@@ -19,13 +19,18 @@ app.use(bodyParser.json());
 
 // MySQL 연결 설정
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'jiseok426',
+  host: 'brandpage-sqlserver.mysql.database.azure.com',
+  user: 'brandadmin',
+  password: 'brandpage123!',
   database: 'portfolio_db',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  port: 3306,
+  queueLimit: 0,
+  ssl: {
+    rejectUnauthorized: false
+  }
+
 });
 
 // 데이터베이스 연결 테스트
