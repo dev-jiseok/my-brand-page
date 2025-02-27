@@ -1,36 +1,42 @@
-name: Azure Deployment
+name: Azure Static Web Apps CI/CD
 
 on:
   push:
     branches:
-      - main  # main 브랜치에 푸시될 때 실행
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
 
 jobs:
-  # 프론트엔드 배포
-  deploy-frontend:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
+    name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
         with:
-          node-version: '18'
-          
-      - name: Install & Build Frontend
+          node-version: '16.x'
+      
+      - name: Build React App
         run: |
           cd client
-          npm ci
+          npm install
           npm run build
           
-      - name: Deploy to Azure Static Web App
+      - name: Deploy to Azure Static Web Apps
+        id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APP_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.948ddb3bc39d00aa498b48dff205adcaf09a1b476f140264640537aa22622a7306-db8ed8f1-ff2f-4868-beec-87fa31dcfa740002512044900100 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          app_location: 'client'
-          output_location: 'build'  # React 기준(Vue는 'dist', Angular는 'dist/[project-name]')
-          skip_api_build: true
+          app_location: '/client'
+          output_location: 'build'
+          skip_app_build: true  # 이미 위에서 빌드했으므로 skip
           
   # 백엔드 배포
   deploy-backend:
@@ -51,6 +57,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'backend-brandfactory'  # Azure App Service의 이름으로 변경
+          app-name: 'my-brand-page-backend'  # Azure App Service의 이름으로 변경
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: './server'
