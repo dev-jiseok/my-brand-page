@@ -111,7 +111,7 @@ const Portfolio = ({ userData }) => {
       </nav>
 
       {/* Hero Section */}
-      <section className="text-center py-20">
+      <section className="text-center py-7">
         <div className="max-w-4xl mx-auto px-6">
           <div className="mb-10">
             <div className="w-48 h-48 mx-auto relative">
@@ -145,7 +145,7 @@ const Portfolio = ({ userData }) => {
       </section>
 
       {/* Videos Section */}
-      <section className="py-16 px-6">
+      <section className="py-7 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold mb-8">Videos</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -175,7 +175,7 @@ const Portfolio = ({ userData }) => {
       </section>
 
       {/* What I Do Section */}
-      <section className="py-16 px-6">
+      <section className="py-7 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold mb-8">What I Do</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -195,7 +195,7 @@ const Portfolio = ({ userData }) => {
       </section>
 
       {/* Books Section */}
-      <section className="py-16 px-6">
+      <section className="py-7 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold mb-8">Books</h2>
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
@@ -223,7 +223,7 @@ const Portfolio = ({ userData }) => {
       </section>
 
       {/* Career & Education Section */}
-      <section className="py-16 px-6">
+      <section className="py-7 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Career */}
           <div>
@@ -282,7 +282,7 @@ const Portfolio = ({ userData }) => {
       </section>
 
       {/* Certificates & Awards Section */}
-      <section className="py-16 px-6">
+      <section className="py-7 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold mb-8">Certificates & Awards</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -314,7 +314,7 @@ const Portfolio = ({ userData }) => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 px-6 bg-gray-800">
+      <section className="py-6 px-6 bg-gray-800">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl font-bold mb-8">Location & Contact</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
