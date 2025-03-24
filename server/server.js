@@ -20,8 +20,8 @@ app.use(bodyParser.json());
 // MySQL 연결 설정
 const pool = mysql.createPool({
   host: 'brandpage-sqlserver.mysql.database.azure.com',
-  user: 'brandadmin',
-  password: 'brandpage123!',
+  user: 'testjiseok',
+  password: 'jiseok426',
   database: 'portfolio_db',
   waitForConnections: true,
   connectionLimit: 10,
